@@ -1,0 +1,25 @@
+version: 2
+project_name: topf-infisical 
+before:
+  hooks:
+  - go mod tidy
+builds:
+  - id: topf-infisical 
+    main: "./"
+    binary: topf-infisical 
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X github.com/shiper-app/topf-infisical.version={{.Version}}
+archives:
+  - formats: binary
+
+changelog:
+  use: github-native
